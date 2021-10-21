@@ -58,9 +58,12 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
                 LocalBroadcastManager.getInstance(context)
                         .sendBroadcast(new Intent(Common.KEY_ENABLE_HOME).putExtra("position", position));
 
+                Intent intent = new Intent(context, PokeDetail.class);
+                view.getContext().startActivity(intent);
+                //Intent intent = new Intent(context,PokeDetail.class);
+                //view.getContext().startActivity(intent);
             }
         });
-
 
 
 

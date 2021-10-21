@@ -119,15 +119,7 @@
                     android:layout_marginBottom="8dp"
                     ></androidx.recyclerview.widget.RecyclerView>
 
-
-
-
-
             </LinearLayout>
-
-
-
-
 
         </androidx.cardview.widget.CardView>
 
@@ -141,5 +133,39 @@
             android:src="@drawable/ic_launcher_background" />
 
     </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Button"
+        android:id="@+id/bt_deslogar2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="50sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily=""
+        android:text="Sign Out"
+        android:textColor="@color/black"
+        android:backgroundTint="#85FFFFFF"
+        android:textAllCaps="false"
+        android:padding="0dp"
+        android:textSize="20sp"  />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/bt_voltar"
+        style="@style/Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#85FFFFFF"
+        android:fontFamily=""
+        android:padding="0dp"
+        android:text="Voltar"
+        android:layout_marginBottom="8dp"
+        android:textAllCaps="false"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/bt_deslogar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
