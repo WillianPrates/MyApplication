@@ -1,0 +1,108 @@
+package com.example.myapplication.Adapter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
+import com.example.myapplication.Common.Common;
+import com.example.myapplication.FormCadastro;
+import com.example.myapplication.FormLogin;
+import com.example.myapplication.Interface.IItemClickListener;
+import com.example.myapplication.Model.Modelo;
+import com.example.myapplication.PokeDetail;
+import com.example.myapplication.Produto;
+import com.example.myapplication.R;
+
+import java.util.ArrayList;
+
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
+
+    Context context;
+    ArrayList<Modelo> data;
+
+    public Adapter(Context context, ArrayList<Modelo> data) {
+        this.context = context;
+        this.data = data;
+    }
+
+    @NonNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter,null));
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
+        Glide.with(context)
+                .asBitmap()
+                .load("https://cdn.traction.one/pokedex/pokemon/"+(position+1)+".png").into(holder.image);
+
+        holder.name.setText(data.get(position).getName());
+
+        holder.setiItemClickListener(new IItemClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Toast.makeText(context,"Pokemon clicado: "+data.get(position).getName(), Toast.LENGTH_SHORT).show();
+                LocalBroadcastManager.getInstance(context)
+                        .sendBroadcast(new Intent(Common.KEY_ENABLE_HOME).putExtra("position", position));
+
+            }
+        });
+
+
+
+
+
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return data.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        ImageView image;
+        TextView name;
+
+        IItemClickListener iItemClickListener;
+
+        public IItemClickListener getiItemClickListener(){
+            return iItemClickListener;
+        }
+
+        public void setiItemClickListener(IItemClickListener iItemClickListener){
+            this.iItemClickListener = iItemClickListener;
+        }
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            this.image = itemView.findViewById(R.id.image);
+            this.name = itemView.findViewById(R.id.name_pokemon);
+
+            itemView.setOnClickListener(this);
+
+
+        }
+
+        public void onClick(View view) {
+            iItemClickListener.onClick(view,getAdapterPosition());
+        }
+    }
+
+
+}
+

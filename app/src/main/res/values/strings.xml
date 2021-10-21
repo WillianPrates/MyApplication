@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="Entrar">Entrar</string>
+    <string name="TextCadastro">Crie uma conta clicando aqui</string>
+    <string name="senha">Senha</string>
+    <string name="cadastre_se">Cadastre-se</string>
+    <string name="nome">Nome</string>
+
+</resources>
