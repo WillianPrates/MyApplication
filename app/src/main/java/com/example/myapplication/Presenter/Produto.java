@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.Presenter;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -17,7 +17,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.myapplication.Adapter.Adapter;
+import com.example.myapplication.FormLogin;
 import com.example.myapplication.Model.Modelo;
+import com.example.myapplication.R;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
@@ -48,7 +50,7 @@ public class Produto extends AppCompatActivity {
             public void onClick(View view) {
 
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(Produto.this,FormLogin.class);
+                Intent intent = new Intent(Produto.this, FormLogin.class);
                 startActivity(intent);
                 finish();
             }
@@ -64,7 +66,7 @@ public class Produto extends AppCompatActivity {
         recyclerView.setLayoutManager(new GridLayoutManager(this,2));
         recyclerView.setAdapter(adapter);
 
-        GetPokemon("https://pokeapi.co/api/v2/pokemon?limit=1050");
+        GetPokemon("https://pokeapi.co/api/v2/pokemon");
 
         //TESTE CLICK #################
 
@@ -76,51 +78,51 @@ public class Produto extends AppCompatActivity {
         pd.show();
 
         StringRequest request = new StringRequest(
-                Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                pd.dismiss();
-                Log.d(TAG, "onResponse: "+response);
+            Request.Method.GET, url, new Response.Listener<String>() {
+        @Override
+        public void onResponse(String response) {
+            pd.dismiss();
+            Log.d(TAG, "onResponse: "+response);
 
-                try {
-                    JSONObject object = new JSONObject(response);
-                    JSONArray array = object.getJSONArray("results");
+            try {
+                JSONObject object = new JSONObject(response);
+                JSONArray array = object.getJSONArray("results");
 
-                    for(int i = 0; i < array.length(); i ++){
-                        JSONObject object1 = array.getJSONObject(i);
+                for(int i = 0; i < array.length(); i ++){
+                    JSONObject object1 = array.getJSONObject(i);
 
-                        data.add(
-                                new Modelo(
-                                        object1.getString("name"),
-                                        object1.getString("url")
-                                )
-                        );
+                    data.add(
+                            new Modelo(
+                                    object1.getString("name"),
+                                    object1.getString("url")
+                            )
+                    );
 
-                        Log.d(TAG, "onResponse: "+data.get(i).getName());
+                    Log.d(TAG, "onResponse: "+data.get(i).getName());
 
 
-                    }
-
-                    adapter.notifyDataSetChanged();
-
-                }catch (JSONException e){
-                    e.printStackTrace();
                 }
 
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                pd.dismiss();
-                Log.d(TAG, "onResponse: "+error);
+                adapter.notifyDataSetChanged();
 
+            }catch (JSONException e){
+                e.printStackTrace();
             }
+
         }
-        );
+    }, new Response.ErrorListener() {
+        @Override
+        public void onErrorResponse(VolleyError error) {
+            pd.dismiss();
+            Log.d(TAG, "onResponse: "+error);
+
+        }
+    }
+    );
 
         Volley.newRequestQueue(this).add(request);
-    }
-    private void IniciarComponentes(){
+}
+    public void IniciarComponentes(){
         bt_deslogar = findViewById(R.id.bt_deslogar);
     }
 

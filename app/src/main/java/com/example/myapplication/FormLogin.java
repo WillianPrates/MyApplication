@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.myapplication.Presenter.Produto;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -65,7 +66,7 @@ public class FormLogin extends AppCompatActivity {
     }
 
     private void TelaPrincipal(){
-        Intent intent = new Intent(FormLogin.this,Produto.class);
+        Intent intent = new Intent(FormLogin.this, Produto.class);
         startActivity(intent);
         finish();
     }

@@ -9,19 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Common.Common;
-import com.example.myapplication.FormCadastro;
-import com.example.myapplication.FormLogin;
 import com.example.myapplication.Interface.IItemClickListener;
 import com.example.myapplication.Model.Modelo;
 import com.example.myapplication.PokeDetail;
-import com.example.myapplication.Produto;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -30,6 +26,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
     Context context;
     ArrayList<Modelo> data;
+
 
     public Adapter(Context context, ArrayList<Modelo> data) {
         this.context = context;
@@ -55,13 +52,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
             @Override
             public void onClick(View view, int position) {
                 Toast.makeText(context,"Pokemon clicado: "+data.get(position).getName(), Toast.LENGTH_SHORT).show();
-                LocalBroadcastManager.getInstance(context)
-                        .sendBroadcast(new Intent(Common.KEY_ENABLE_HOME).putExtra("position", position));
+                /*LocalBroadcastManager.getInstance(context)
+                        .sendBroadcast(new Intent(Common.KEY_ENABLE_HOME).putExtra("position", position));*/
 
                 Intent intent = new Intent(context, PokeDetail.class);
+                intent.putExtra("position", String.valueOf(position));
+                intent.putExtra("ListPokemon",data);
                 view.getContext().startActivity(intent);
-                //Intent intent = new Intent(context,PokeDetail.class);
-                //view.getContext().startActivity(intent);
+
             }
         });
 

@@ -15,7 +15,7 @@
             android:name=".PokeDetail"
             android:exported="true" />
         <activity
-            android:name=".Produto"
+            android:name=".Presenter.Produto"
             android:exported="true" />
         <activity
             android:name=".FormCadastro"
