@@ -7,115 +7,74 @@
     tools:context=".PokeDetail"
     android:background="@drawable/background">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        >
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="55dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="10dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="55dp"
+            android:layout_marginRight="16dp"
             app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="10dp"
             app:cardElevation="0dp"
-            >
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <LinearLayout
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal"
-                android:padding="18dp"
-                android:layout_marginTop="80dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="80dp"
+                android:orientation="vertical"
+                android:padding="18dp">
 
                 <TextView
+                    android:layout_marginTop="60dp"
                     android:id="@+id/pokeName"
-                    android:textSize="30sp"
-                    android:layout_marginBottom="15dp"
-                    android:textStyle="bold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="20dp"
+                    android:textAllCaps="true"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Height"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/pokeHeight"
-                    android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Weight"
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/pokeWeight"
-                    android:textSize="18dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-
-
-                <TextView
-                    android:id="@+id/pokeType"
-                    android:textSize="18dp"
-                    android:text="Type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerType"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="8dp"
-                    ></androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/pokeWeakness"
-                    android:textSize="18dp"
-                    android:text="Weakness"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerWeakness"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="8dp"
-                    ></androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/pokeEvolutionPrev"
-                    android:textSize="18dp"
-                    android:text="Prev Evolution"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerEvolutionPrev"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="8dp"
-                    ></androidx.recyclerview.widget.RecyclerView>
-
-                <TextView
-                    android:id="@+id/pokeEvolutionNext"
-                    android:textSize="18dp"
-                    android:text="Next Evolution"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerEvolutionNext"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginBottom="8dp"
-                    ></androidx.recyclerview.widget.RecyclerView>
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18dp" />
 
             </LinearLayout>
 
@@ -123,14 +82,14 @@
 
         <ImageView
             android:id="@+id/pokeImage"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_alignTop="@+id/card_view"
-            android:layout_centerHorizontal="true"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
             android:layout_marginTop="-50dp"
-            android:src="@drawable/ic_launcher_background" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/card_view" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.appcompat.widget.AppCompatButton
         style="@style/Button"

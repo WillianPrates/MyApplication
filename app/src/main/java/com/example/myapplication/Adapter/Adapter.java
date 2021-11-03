@@ -1,5 +1,6 @@
 package com.example.myapplication.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -10,11 +11,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.myapplication.Common.Common;
 import com.example.myapplication.Interface.IItemClickListener;
 import com.example.myapplication.Model.Modelo;
 import com.example.myapplication.PokeDetail;
@@ -22,7 +21,7 @@ import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
+public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     Context context;
     ArrayList<Modelo> data;
@@ -33,10 +32,11 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         this.data = data;
     }
 
+    @SuppressLint("InflateParams")
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter,null));
+        return new ViewHolder(LayoutInflater.from(context).inflate(R.layout.adapter, null));
     }
 
     @Override
@@ -44,27 +44,19 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
         Glide.with(context)
                 .asBitmap()
-                .load("https://cdn.traction.one/pokedex/pokemon/"+(position+1)+".png").into(holder.image);
+                .load("https://cdn.traction.one/pokedex/pokemon/" + (position + 1) + ".png").into(holder.image);
 
         holder.name.setText(data.get(position).getName());
 
-        holder.setiItemClickListener(new IItemClickListener() {
-            @Override
-            public void onClick(View view, int position) {
-                Toast.makeText(context,"Pokemon clicado: "+data.get(position).getName(), Toast.LENGTH_SHORT).show();
-                /*LocalBroadcastManager.getInstance(context)
-                        .sendBroadcast(new Intent(Common.KEY_ENABLE_HOME).putExtra("position", position));*/
+        holder.setiItemClickListener((view, position1) -> {
+            Toast.makeText(context, "Pokemon clicado: " + data.get(position1).getName(), Toast.LENGTH_SHORT).show();
 
-                Intent intent = new Intent(context, PokeDetail.class);
-                intent.putExtra("position", String.valueOf(position));
-                intent.putExtra("ListPokemon",data);
-                view.getContext().startActivity(intent);
+            Intent intent = new Intent(context, PokeDetail.class);
+            intent.putExtra("position", String.valueOf(position1));
+            intent.putExtra("ListPokemon", data);
+            view.getContext().startActivity(intent);
 
-            }
         });
-
-
-
 
 
     }
@@ -74,18 +66,14 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
         return data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView image;
         TextView name;
 
         IItemClickListener iItemClickListener;
 
-        public IItemClickListener getiItemClickListener(){
-            return iItemClickListener;
-        }
-
-        public void setiItemClickListener(IItemClickListener iItemClickListener){
+        public void setiItemClickListener(IItemClickListener iItemClickListener) {
             this.iItemClickListener = iItemClickListener;
         }
 
@@ -96,11 +84,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder>{
 
             itemView.setOnClickListener(this);
 
-
         }
 
         public void onClick(View view) {
-            iItemClickListener.onClick(view,getAdapterPosition());
+            iItemClickListener.onClick(view, getAdapterPosition());
         }
     }
 

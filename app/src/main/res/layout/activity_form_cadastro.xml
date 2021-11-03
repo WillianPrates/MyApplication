@@ -69,8 +69,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
         android:text="Cadastrar"
-
-
         />
+
+    <androidx.appcompat.widget.AppCompatButton
+        style="@style/Button"
+        android:id="@+id/bt_voltarCadastro"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily=""
+        android:text="Voltar"
+        android:textColor="@color/black"
+        android:backgroundTint="#85FFFFFF"
+        android:textAllCaps="false"
+        android:padding="0dp"
+        android:textSize="20sp"  />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
