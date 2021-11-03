@@ -1,7 +1,6 @@
 package com.example.myapplication.Common;
 
 
-
 import com.example.myapplication.Model.Modelo;
 
 import java.util.ArrayList;
