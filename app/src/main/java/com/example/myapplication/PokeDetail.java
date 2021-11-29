@@ -14,21 +14,24 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
-import com.example.myapplication.Model.Modelo;
-import com.example.myapplication.Presenter.Produto;
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.myapplication.Model.ModeloPoke;
+import com.example.myapplication.Presenter.PokeList;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.json.JSONException;
 
+/*
+PokeStats pokeStats = mapper.readValue(object.getString("stats"),PokeStats.class);
+ObjectMapper mapper = new ObjectMapper();
+
+
+*/
 public class PokeDetail extends AppCompatActivity {
-    private Button bt_deslogar2;
     private Button bt_voltar;
 
     private TextView name;
@@ -36,7 +39,7 @@ public class PokeDetail extends AppCompatActivity {
     private TextView weight;
     private ImageView pokeImage;
 
-    ArrayList<Modelo> data = new ArrayList<>();
+    List<ModeloPoke> data = new ArrayList<>();
     private int position;
 
     @Override
@@ -52,44 +55,34 @@ public class PokeDetail extends AppCompatActivity {
         popularDadoPokemon();
 
         Glide.with(PokeDetail.this)
-                .load("https://cdn.traction.one/pokedex/pokemon/" + (position + 1) + ".png")
+                .load("https://cdn.traction.one/pokedex/pokemon/" + (data.get(position).getId()) + ".png")
                 .into(pokeImage);
-
-        bt_deslogar2.setOnClickListener(view -> {
-
-            FirebaseAuth.getInstance().signOut();
-            Intent intent = new Intent(PokeDetail.this, FormLogin.class);
-            startActivity(intent);
-            finish();
-        });
 
         bt_voltar.setOnClickListener(view -> {
 
-            Intent intent = new Intent(PokeDetail.this, Produto.class);
+            Intent intent = new Intent(PokeDetail.this, PokeList.class);
             startActivity(intent);
             finish();
         });
     }
 
     private void popularDadoPokemon() {
-        Modelo pokemon = data.get(position);
+        ModeloPoke pokemon = data.get(position);
 
         weight.setText(pokemon.getPokeWeight());
         name.setText(pokemon.getName());
         height.setText(pokemon.getPokeHeight());
     }
 
-    private ArrayList<Modelo> getExtraListPokemon(Bundle savedInstanceState) {
+    private ArrayList<ModeloPoke> getExtraListPokemon(Bundle savedInstanceState) {
 
-        ArrayList<Modelo> data = new ArrayList<>();
+        ArrayList<ModeloPoke> data = new ArrayList<>();
 
         if (savedInstanceState == null) {
             Bundle extra = getIntent().getExtras();
             if (extra == null) {
                 return data;
-            } else {
-                data = (ArrayList<Modelo>) extra.getSerializable("ListPokemon");
-            }
+            } else data = (ArrayList<ModeloPoke>) extra.getSerializable("ListPokemon");
         }
         return data;
     }
@@ -111,7 +104,6 @@ public class PokeDetail extends AppCompatActivity {
     }
 
     public void IniciarComponentes() {
-        bt_deslogar2 = findViewById(R.id.bt_deslogar2);
         bt_voltar = findViewById(R.id.bt_voltar);
         weight = findViewById(R.id.pokeWeight);
         name = findViewById(R.id.pokeName);

@@ -15,19 +15,21 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Interface.IItemClickListener;
-import com.example.myapplication.Model.Modelo;
+import com.example.myapplication.Model.ModeloPoke;
 import com.example.myapplication.PokeDetail;
 import com.example.myapplication.R;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
     Context context;
-    ArrayList<Modelo> data;
+    List<ModeloPoke> data;
 
 
-    public Adapter(Context context, ArrayList<Modelo> data) {
+    public Adapter(Context context, List<ModeloPoke> data) {
         this.context = context;
         this.data = data;
     }
@@ -44,7 +46,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         Glide.with(context)
                 .asBitmap()
-                .load("https://cdn.traction.one/pokedex/pokemon/" + (position + 1) + ".png").into(holder.image);
+                .load("https://cdn.traction.one/pokedex/pokemon/" + (data.get(position).getId()) + ".png").into(holder.image);
 
         holder.name.setText(data.get(position).getName());
 
@@ -53,7 +55,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
             Intent intent = new Intent(context, PokeDetail.class);
             intent.putExtra("position", String.valueOf(position1));
-            intent.putExtra("ListPokemon", data);
+            intent.putExtra("ListPokemon", (Serializable) data);
             view.getContext().startActivity(intent);
 
         });

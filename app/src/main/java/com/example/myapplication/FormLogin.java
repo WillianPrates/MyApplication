@@ -13,7 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Presenter.Produto;
+import com.example.myapplication.Presenter.PokeList;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
@@ -64,7 +64,7 @@ public class FormLogin extends AppCompatActivity {
     }
 
     private void TelaPrincipal() {
-        Intent intent = new Intent(FormLogin.this, Produto.class);
+        Intent intent = new Intent(FormLogin.this, PokeList.class);
         startActivity(intent);
         finish();
     }

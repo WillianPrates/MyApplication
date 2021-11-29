@@ -1,32 +1,44 @@
 package com.example.myapplication.Model;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class Modelo implements Serializable {
+public class ModeloPoke implements Serializable {
     public String name;
     public String url;
     public String pokeHeight;
     public String pokeWeight;
+    public Integer id;
+    public List<PokeStats> pokeStats;
+    public List<PokeTypes> pokeTypes;
 
 
-    public Modelo(String name, String url) {
+    public ModeloPoke(String name, String url, Integer id) {
         this.name = name;
         this.url = url;
+        this.id = id;
     }
 
-    public Modelo(String url, String pokeHeight, String pokeWeight) {
+    public ModeloPoke(String url, String pokeHeight, String pokeWeight) {
         this.url = url;
         this.pokeHeight = pokeHeight;
         this.pokeWeight = pokeWeight;
     }
 
-    public Modelo(String name, String url, String pokeHeight, String pokeWeight) {
+    public ModeloPoke(String name, String url, String pokeHeight, String pokeWeight) {
         this.name = name;
         this.url = url;
         this.pokeHeight = pokeHeight;
         this.pokeWeight = pokeWeight;
     }
 
+
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getId() {return id;}
 
     public String getPokeHeight() {
         return pokeHeight;
