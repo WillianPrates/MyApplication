@@ -15,10 +15,20 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Model.ModeloPoke;
+import com.example.myapplication.Model.PokeStats;
+import com.example.myapplication.Model.PokeTypes;
 import com.example.myapplication.Presenter.PokeList;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -26,8 +36,7 @@ import java.util.Objects;
 import org.json.JSONException;
 
 /*
-PokeStats pokeStats = mapper.readValue(object.getString("stats"),PokeStats.class);
-ObjectMapper mapper = new ObjectMapper();
+
 
 
 */
@@ -132,8 +141,16 @@ public class PokeDetail extends AppCompatActivity {
 
 
         try {
+            ObjectMapper mapper = new ObjectMapper();
+
             JSONObject object = new JSONObject(response);
-            //JSONArray array = object.getJSONArray("object");
+
+            Gson gson = new Gson();
+
+            Type typeStats = new TypeToken<List<PokeStats>>() {}.getType();
+            Type typeType = new TypeToken<List<PokeTypes>>() {}.getType();
+            List<PokeStats> listaStatus = gson.fromJson(object.getString("stats"), typeStats);
+            List<PokeTypes> listaTypes = gson.fromJson(object.getString("types"), typeType);
 
             String height = object.getString("height");
             String weight = object.getString("weight");
@@ -145,8 +162,6 @@ public class PokeDetail extends AppCompatActivity {
             e.printStackTrace();
 
         }
-
-
     }
 
 }
