@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".ListTypes"
+            android:exported="false" />
+        <activity
             android:name=".PokeDetail"
             android:exported="true" />
         <activity

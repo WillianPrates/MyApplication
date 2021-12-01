@@ -1,14 +1,20 @@
 package com.example.myapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.AbsListView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
@@ -30,6 +36,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,10 +50,14 @@ import org.json.JSONException;
 public class PokeDetail extends AppCompatActivity {
     private Button bt_voltar;
 
+    private Context context;
+
     private TextView name;
     private TextView height;
     private TextView weight;
     private ImageView pokeImage;
+    private TextView type1;
+    private String teste;
 
     List<ModeloPoke> data = new ArrayList<>();
     private int position;
@@ -73,7 +84,8 @@ public class PokeDetail extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
-    }
+
+        }
 
     private void popularDadoPokemon() {
         ModeloPoke pokemon = data.get(position);
@@ -81,6 +93,9 @@ public class PokeDetail extends AppCompatActivity {
         weight.setText(pokemon.getPokeWeight());
         name.setText(pokemon.getName());
         height.setText(pokemon.getPokeHeight());
+
+
+
     }
 
     private ArrayList<ModeloPoke> getExtraListPokemon(Bundle savedInstanceState) {
@@ -118,6 +133,7 @@ public class PokeDetail extends AppCompatActivity {
         name = findViewById(R.id.pokeName);
         height = findViewById(R.id.pokeHeight);
         pokeImage = findViewById(R.id.pokeImage);
+        type1 = findViewById(R.id.pokeType1);
     }
 
     private static final String TAG = "MainResponse";
@@ -151,9 +167,11 @@ public class PokeDetail extends AppCompatActivity {
             Type typeType = new TypeToken<List<PokeTypes>>() {}.getType();
             List<PokeStats> listaStatus = gson.fromJson(object.getString("stats"), typeStats);
             List<PokeTypes> listaTypes = gson.fromJson(object.getString("types"), typeType);
-
             String height = object.getString("height");
             String weight = object.getString("weight");
+
+            listaTypes.get(name.getText().charAt(0));
+
 
             this.height.setText(height);
             this.weight.setText(weight);
@@ -163,6 +181,7 @@ public class PokeDetail extends AppCompatActivity {
 
         }
     }
+
 
 }
 
