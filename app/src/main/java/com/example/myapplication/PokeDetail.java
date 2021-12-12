@@ -5,16 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.Slide;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.StringRequest;
@@ -56,8 +64,6 @@ public class PokeDetail extends AppCompatActivity {
     private TextView height;
     private TextView weight;
     private ImageView pokeImage;
-    private TextView type1;
-    private String teste;
 
     List<ModeloPoke> data = new ArrayList<>();
     private int position;
@@ -133,7 +139,7 @@ public class PokeDetail extends AppCompatActivity {
         name = findViewById(R.id.pokeName);
         height = findViewById(R.id.pokeHeight);
         pokeImage = findViewById(R.id.pokeImage);
-        type1 = findViewById(R.id.pokeType1);
+
     }
 
     private static final String TAG = "MainResponse";
@@ -170,11 +176,52 @@ public class PokeDetail extends AppCompatActivity {
             String height = object.getString("height");
             String weight = object.getString("weight");
 
-            listaTypes.get(name.getText().charAt(0));
-
-
             this.height.setText(height);
             this.weight.setText(weight);
+
+             /* Layout que irá receber os TextView
+             */
+            LinearLayout mContent = LinearLayout.class.cast(findViewById(R.id.mContent));
+            LinearLayout mContent2 = LinearLayout.class.cast(findViewById(R.id.mContent2));
+            /**
+             * Lista de TextView que serão criados dinamicamente
+             */
+            List<TextView> textos = new ArrayList<>();
+            List<TextView> textos2 = new ArrayList<>();
+
+            // Ponteiroi
+            int idPt = 1;
+            int idPt2 = 1;
+
+            for (PokeTypes listaDosTypos : listaTypes){
+                // Vamos criar a a instancia do TExtView
+                final TextView txtItem = new TextView(this);
+                // Informamos um id
+                txtItem.setId( idPt );
+                idPt++;
+                txtItem.setText(listaDosTypos.getType().getName());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.weight = 1.0f;
+                txtItem.setGravity(Gravity.CENTER);
+                txtItem.setLayoutParams(params);
+                mContent.addView(txtItem);
+            }
+
+            for (PokeStats listaDosStatus : listaStatus){
+                // Vamos criar a a instancia do TExtView
+                final TextView txtItem2 = new TextView(this);
+                // Informamos um id
+                txtItem2.setId( idPt2 );
+                idPt2++;
+                txtItem2.setText(listaDosStatus.getStat().getName());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.weight = 1.0f;
+                txtItem2.setGravity(Gravity.CENTER);
+                txtItem2.setLayoutParams(params);
+                mContent.addView(txtItem2);
+            }
+
+
 
         }catch(JSONException e) {
             e.printStackTrace();

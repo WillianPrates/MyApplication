@@ -90,47 +90,71 @@
                     android:id="@+id/pokeWeight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="19dp"
+                    android:layout_marginTop="8dp"
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textWeight"
-                    app:layout_goneMarginBottom="10dp"/>
+                    app:layout_goneMarginBottom="10dp" />
 
                 <TextView
-                    android:id="@+id/textType"
+                    android:id="@+id/typeId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Type"
+                    android:layout_gravity="center_horizontal"
                     android:textSize="18dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/pokeWeight"
-                    android:text="Type"/>
-
-                <TextView
-                    android:id="@+id/pokeType1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="18dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textType"
                     />
 
-                <ListView
-                    android:id="@+id/listType"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@+id/textType"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recycler_view_layour_recycler"
+                <ScrollView
+                    android:id="@+id/ScrollView1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:listitem="@layout/main_line_view"/>
+                    app:layout_constraintTop_toBottomOf="@+id/typeId"
+                    >
 
+                    <LinearLayout
+                        android:id="@+id/mContent"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center">
+
+                    </LinearLayout>
+                </ScrollView>
+
+                <TextView
+                    android:id="@+id/TextStat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Stats"
+                    android:textSize="18dp"
+                    app:layout_constraintTop_toBottomOf="@+id/ScrollView1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    />
+
+                <ScrollView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/mContent2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                    </LinearLayout>
+                </ScrollView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
