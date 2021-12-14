@@ -221,7 +221,7 @@ public class PokeDetail extends AppCompatActivity {
                 mContent.addView(txtItem2);
             }
 
-
+    
 
         }catch(JSONException e) {
             e.printStackTrace();

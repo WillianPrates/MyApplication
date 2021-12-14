@@ -16,7 +16,6 @@ public class PokeStats {
         this.stat = stat;
     }
 
-
     public Integer getEffort() {
         return effort;
     }
