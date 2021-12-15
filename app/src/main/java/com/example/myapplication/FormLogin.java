@@ -71,31 +71,28 @@ public class FormLogin extends AppCompatActivity {
     private void AutenticarUsuario(View view) {
         String email = edit_email.getText().toString();
         String senha = edit_senha.getText().toString();
-        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
+        FirebaseAuth.getInstance().signInWithEmailAndPassword(email, senha).addOnCompleteListener(task -> {
 
-                if (task.isSuccessful()) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(() -> TelaPrincipal(), 3000);
+            if (task.isSuccessful()) {
+                progressBar.setVisibility(View.VISIBLE);
+                new Handler().postDelayed(() -> TelaPrincipal(), 3000);
 
-                } else {
-                    String erro;
-                    try {
+            } else {
+                String erro;
+                try {
 
-                        throw Objects.requireNonNull(task.getException());
+                    throw Objects.requireNonNull(task.getException());
 
-                    } catch (Exception e) {
+                } catch (Exception e) {
 
-                        erro = "Erro ao fazer o login.";
-
-                    }
-                    Snackbar snackbar = Snackbar.make(view, erro, Snackbar.LENGTH_SHORT);
-                    snackbar.setBackgroundTint(Color.WHITE);
-                    snackbar.setTextColor(Color.BLACK);
-                    snackbar.show();
+                    erro = "Erro ao fazer o login.";
 
                 }
+                Snackbar snackbar = Snackbar.make(view, erro, Snackbar.LENGTH_SHORT);
+                snackbar.setBackgroundTint(Color.WHITE);
+                snackbar.setTextColor(Color.BLACK);
+                snackbar.show();
+
             }
         });
 

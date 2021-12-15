@@ -18,14 +18,14 @@ import java.util.List;
 public final class ListPresenter {
 
     private static final String TAG = "MainResponse";
-    private List<ModeloPoke> pokemonListData = new ArrayList<>();
+    private static final List<ModeloPoke> pokemonListData = new ArrayList<>();
 
     private ListPresenter(){
 
     }
 
-    public static ListPresenter getInstance(){
-        return new ListPresenter();
+    public static List<ModeloPoke> getInstance(Context context){
+        return new ListPresenter().getPokemon(context);
     }
 
     public List<ModeloPoke> getPokemon(Context context){
@@ -59,7 +59,7 @@ public final class ListPresenter {
                         new ModeloPoke(
                                 object1.getString("name"),
                                 object1.getString("url"),
-                                i +1
+                                i
                         )
                 );
 

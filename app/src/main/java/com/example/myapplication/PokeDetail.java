@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -10,13 +11,21 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.example.myapplication.Model.ModeloPoke;
 import com.example.myapplication.Model.PokeStats;
 import com.example.myapplication.Model.PokeTypes;
 import com.example.myapplication.Presenter.PokeInfos;
+import com.google.common.reflect.TypeToken;
+import com.google.gson.Gson;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 
@@ -27,6 +36,8 @@ public class PokeDetail extends AppCompatActivity {
     private TextView height;
     private TextView weight;
     private ImageView pokeImage;
+    LinearLayout mContent;
+    LinearLayout mContent2;
 
     private PokeInfos pokeInfos = new PokeInfos();
     private int position;
@@ -46,7 +57,7 @@ public class PokeDetail extends AppCompatActivity {
 
         pokemon = pokeInfos.getPokemon(savedInstanceState, position, this, getIntent());
 
-        popularDadoPokemon(pokemon);
+        getPokemon(pokemon);
 
         Glide.with(PokeDetail.this)
                 .load("https://cdn.traction.one/pokedex/pokemon/" + position + ".png")
@@ -61,62 +72,80 @@ public class PokeDetail extends AppCompatActivity {
 
     }
 
-    public void popularDadoPokemon(ModeloPoke pokemon) {
-
-        weight.setText(pokemon.getPokeWeight());
-        name.setText(pokemon.getName());
-        height.setText(pokemon.getPokeHeight());
-
-        montarAtributos(pokemon);
-    }
-
     public void IniciarComponentes() {
         bt_voltar = findViewById(R.id.bt_voltar);
         weight = findViewById(R.id.pokeWeight);
         name = findViewById(R.id.pokeName);
         height = findViewById(R.id.pokeHeight);
         pokeImage = findViewById(R.id.pokeImage);
+        mContent = LinearLayout.class.cast(findViewById(R.id.mContent));
+        mContent2 = LinearLayout.class.cast(findViewById(R.id.mContent2));
 
     }
 
-    public void montarAtributos(ModeloPoke modeloPoke){
+    private static final String TAG = "MainResponse";
 
-        LinearLayout mContent = LinearLayout.class.cast(findViewById(R.id.mContent));
-        LinearLayout mContent2 = LinearLayout.class.cast(findViewById(R.id.mContent2));
+    private void getPokemon(ModeloPoke poke){
 
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                poke.getUrl(),
+                this::onResponse,
+                error -> Log.d(TAG, "onResponse: "+error)
+        );
 
-        int idPt = 1;
-        int idPt2 = 1;
+        Volley.newRequestQueue(this).add(request);
 
-        for (PokeTypes listaDosTypos : modeloPoke.getPokeTypes()){
-            // Vamos criar a a instancia do TExtView
-            final TextView txtItem = new TextView(this);
-            // Informamos um id
-            txtItem.setId( idPt );
-            idPt++;
-            txtItem.setText(listaDosTypos.getType().getName());
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-            params.weight = 1.0f;
-            txtItem.setGravity(Gravity.CENTER);
-            txtItem.setLayoutParams(params);
-            mContent.addView(txtItem);
+    }
+
+    private void onResponse(String response) {
+        try {
+
+            JSONObject object = new JSONObject(response);
+
+            Gson gson = new Gson();
+
+            Type typeStats = new TypeToken<List<PokeStats>>() {}.getType();
+            Type typeType = new TypeToken<List<PokeTypes>>() {}.getType();
+            List<PokeStats> listaStatus = gson.fromJson(object.getString("stats"), typeStats);
+            List<PokeTypes> listaTypes = gson.fromJson(object.getString("types"), typeType);
+            String height = object.getString("height");
+            String weight = object.getString("weight");
+
+            this.height.setText(height);
+            this.weight.setText(weight);
+
+            int idPt = 1;
+            int idPt2 = 1;
+
+            for (PokeTypes listaDosTypos : listaTypes){
+                final TextView txtItem = new TextView(this);
+                txtItem.setId(idPt);
+                idPt++;
+                txtItem.setText(listaDosTypos.getType().getName());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.weight = 1.0f;
+                txtItem.setGravity(Gravity.CENTER);
+                txtItem.setLayoutParams(params);
+                mContent.addView(txtItem);
+            }
+
+            for (PokeStats listaDosStatus : listaStatus){
+                final TextView txtItem2 = new TextView(this);
+                txtItem2.setId( idPt2 );
+                idPt2++;
+                txtItem2.setText(listaDosStatus.getStat().getName());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+                params.weight = 1.0f;
+                txtItem2.setGravity(Gravity.CENTER);
+                txtItem2.setLayoutParams(params);
+                mContent.addView(txtItem2);
+            }
+
+        }catch(JSONException e) {
+            e.printStackTrace();
+
         }
-
-        for (PokeStats listaDosStatus : modeloPoke.getPokeStats()){
-            // Vamos criar a a instancia do TExtView
-            final TextView txtItem2 = new TextView(this);
-            // Informamos um id
-            txtItem2.setId( idPt2 );
-            idPt2++;
-            txtItem2.setText(listaDosStatus.getBase_stat());
-
-            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
-            params.weight = 1.0f;
-            txtItem2.setGravity(Gravity.CENTER);
-            txtItem2.setLayoutParams(params);
-            mContent2.addView(txtItem2);
-        }
-
     }
 }
 

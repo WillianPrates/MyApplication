@@ -46,7 +46,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.ViewHolder> {
 
         Glide.with(context)
                 .asBitmap()
-                .load("https://cdn.traction.one/pokedex/pokemon/" + (data.get(position).getId()) + ".png").into(holder.image);
+                .load("https://cdn.traction.one/pokedex/pokemon/" + position + ".png").into(holder.image);
 
         holder.name.setText(data.get(position).getName());
 

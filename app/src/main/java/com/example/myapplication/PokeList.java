@@ -15,6 +15,7 @@ import com.example.myapplication.Model.ModeloPoke;
 import com.example.myapplication.Presenter.ListPresenter;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,14 +27,14 @@ public class PokeList extends AppCompatActivity {
     private EditText textPesquisaPokemon;
     private Button bt_pesquisarPokemon;
     private Adapter adapter;
+    private List<ModeloPoke> pokemonListData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
 
-        ListPresenter listPresenter = ListPresenter.getInstance();
-        List<ModeloPoke>pokemonListData = listPresenter.getPokemon(this);
+        pokemonListData = ListPresenter.getInstance(this);
         adapter = new Adapter(this, pokemonListData);
         adapter.notifyDataSetChanged();
 
