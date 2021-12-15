@@ -32,7 +32,7 @@ public class PokeList extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
 
-        ListPresenter listPresenter = new ListPresenter();
+        ListPresenter listPresenter = ListPresenter.getInstance();
         List<ModeloPoke>pokemonListData = listPresenter.getPokemon(this);
         adapter = new Adapter(this, pokemonListData);
         adapter.notifyDataSetChanged();

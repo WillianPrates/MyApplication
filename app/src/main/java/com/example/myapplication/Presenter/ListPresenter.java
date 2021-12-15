@@ -15,22 +15,31 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListPresenter {
+public final class ListPresenter {
 
     private static final String TAG = "MainResponse";
     private List<ModeloPoke> pokemonListData = new ArrayList<>();
 
+    private ListPresenter(){
+
+    }
+
+    public static ListPresenter getInstance(){
+        return new ListPresenter();
+    }
 
     public List<ModeloPoke> getPokemon(Context context){
 
-        StringRequest request = new StringRequest(
-                Request.Method.GET,
-                "https://pokeapi.co/api/v2/pokemon?limit=1050",
-                this::onResponse,
-                error -> Log.d(TAG, "onResponse: "+error)
-        );
+        if (pokemonListData.isEmpty()){
+            StringRequest request = new StringRequest(
+                    Request.Method.GET,
+                    "https://pokeapi.co/api/v2/pokemon?limit=1050",
+                    this::onResponse,
+                    error -> Log.d(TAG, "onResponse: "+error)
+            );
 
-        Volley.newRequestQueue(context).add(request);
+            Volley.newRequestQueue(context).add(request);
+        }
 
         return pokemonListData;
     }
