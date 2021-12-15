@@ -51,7 +51,7 @@ public final class ListPresenter {
             JSONObject object = new JSONObject(response);
             JSONArray array = object.getJSONArray("results");
 
-            for (int i = 0; i < array.length(); i++) {
+            for (int i = 1; i < array.length(); i++) {
 
                 JSONObject object1 = array.getJSONObject(i);
 
@@ -62,8 +62,6 @@ public final class ListPresenter {
                                 i
                         )
                 );
-
-                Log.d(TAG, "onResponse: " + pokemonListData.get(i).getName());
 
             }
 

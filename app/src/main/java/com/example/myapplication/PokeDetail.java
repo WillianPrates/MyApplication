@@ -57,10 +57,10 @@ public class PokeDetail extends AppCompatActivity {
 
         pokemon = pokeInfos.getPokemon(savedInstanceState, position, this, getIntent());
 
-        getPokemon(pokemon);
+        buildPokemon(pokemon);
 
         Glide.with(PokeDetail.this)
-                .load("https://cdn.traction.one/pokedex/pokemon/" + position + ".png")
+                .load("https://cdn.traction.one/pokedex/pokemon/" + pokemon.getId() + ".png")
                 .into(pokeImage);
 
         bt_voltar.setOnClickListener(view -> {
@@ -80,12 +80,13 @@ public class PokeDetail extends AppCompatActivity {
         pokeImage = findViewById(R.id.pokeImage);
         mContent = LinearLayout.class.cast(findViewById(R.id.mContent));
         mContent2 = LinearLayout.class.cast(findViewById(R.id.mContent2));
-
     }
 
     private static final String TAG = "MainResponse";
 
-    private void getPokemon(ModeloPoke poke){
+    private void buildPokemon(ModeloPoke poke){
+
+        this.name.setText(poke.getName());
 
         StringRequest request = new StringRequest(
                 Request.Method.GET,
@@ -120,7 +121,7 @@ public class PokeDetail extends AppCompatActivity {
 
             for (PokeTypes listaDosTypos : listaTypes){
                 final TextView txtItem = new TextView(this);
-                txtItem.setId(idPt);
+                txtItem.setId( idPt );
                 idPt++;
                 txtItem.setText(listaDosTypos.getType().getName());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
