@@ -32,7 +32,7 @@
             android:name="com.example.myapplication.PokeDetail"
             android:exported="true" />
         <activity
-            android:name="com.example.myapplication.Presenter.PokeList"
+            android:name="com.example.myapplication.PokeList"
             android:exported="true" />
         <activity
             android:name="com.example.myapplication.FormCadastro"
