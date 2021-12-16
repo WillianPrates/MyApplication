@@ -60,7 +60,7 @@ public class PokeDetail extends AppCompatActivity {
         buildPokemon(pokemon);
 
         Glide.with(PokeDetail.this)
-                .load("https://cdn.traction.one/pokedex/pokemon/" + pokemon.getId() + ".png")
+                .load("https://cdn.traction.one/pokedex/pokemon/" + (pokemon.getId()+1) + ".png")
                 .into(pokeImage);
 
         bt_voltar.setOnClickListener(view -> {
@@ -142,6 +142,7 @@ public class PokeDetail extends AppCompatActivity {
                 txtItem2.setLayoutParams(params);
                 mContent2.addView(txtItem2);
             }
+
 
         }catch(JSONException e) {
             e.printStackTrace();
