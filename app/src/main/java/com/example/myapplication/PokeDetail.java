@@ -213,12 +213,12 @@ public class PokeDetail extends AppCompatActivity {
                 // Informamos um id
                 txtItem2.setId( idPt2 );
                 idPt2++;
-                txtItem2.setText(listaDosStatus.getStat().getName());
+                txtItem2.setText(listaDosStatus.getBase_stat().toString());
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
                 params.weight = 1.0f;
                 txtItem2.setGravity(Gravity.CENTER);
                 txtItem2.setLayoutParams(params);
-                mContent.addView(txtItem2);
+                mContent2.addView(txtItem2);
             }
 
 
