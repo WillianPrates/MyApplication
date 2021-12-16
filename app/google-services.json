@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1055412682358",
+    "project_id": "onepiece-40112",
+    "storage_bucket": "onepiece-40112.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1055412682358:android:e292daabf781786dfca957",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1055412682358-fefk9rmtertivh9ubut9gnspm6ktk82v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9uC8BeAhYuCeXjvUkttXP-F838XxKo9E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1055412682358-fefk9rmtertivh9ubut9gnspm6ktk82v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
