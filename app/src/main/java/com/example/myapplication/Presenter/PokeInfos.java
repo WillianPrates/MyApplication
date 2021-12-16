@@ -1,31 +1,53 @@
 package com.example.myapplication.Presenter;
 
 import android.content.Context;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.Intent;
+import android.os.Bundle;
 
 import com.example.myapplication.Model.ModeloPoke;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class PokeInfos {
 
-    private Button bt_deslogar2;
+    public int getExtraPosition(Bundle savedInstanceState, Intent intent) {
+        int position = -1;
+        String position2;
 
-    Context context;
-    ArrayList<ModeloPoke> data;
-
-    ImageView pokeImage;
-    TextView pokeName, pokeHeight, pokeWeight;
-    RecyclerView recyclerType, recyclerWeakness, recyclerEvolutionPrev, recyclerEvolutionNext;
-
-    public PokeInfos(Context context, ArrayList<ModeloPoke> data) {
-        this.context = context;
-        this.data = data;
+        if (savedInstanceState == null) {
+            Bundle extra = intent.getExtras();
+            if (extra == null) {
+                position = -1;
+            } else {
+                position2 = extra.getString("position");
+                position = Integer.parseInt(position2);
+            }
+        }
+        return position;
     }
 
+    public ModeloPoke getPokemon(Bundle savedInstanceState, Integer position, Context context, Intent intent){
+
+        ModeloPoke pokemonExtraListPokemon = getPokemonExtraListPokemon(savedInstanceState, intent, position);
+
+        return pokemonExtraListPokemon;
+    }
+
+    private ModeloPoke getPokemonExtraListPokemon(Bundle savedInstanceState, Intent intent, Integer position) {
+
+        if (savedInstanceState == null) {
+            Bundle extra = intent.getExtras();
+            if (extra == null) {
+                return null;
+            } else {
+                List<ModeloPoke> listPokemon = (List<ModeloPoke>) extra.getSerializable("ListPokemon");
+
+                ModeloPoke modeloPoke = listPokemon.get(position);
+
+                return modeloPoke;
+            }
+        }
+        return null;
+    }
 
 }
