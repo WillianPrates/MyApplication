@@ -1,0 +1,39 @@
+com/example/myapplication/BuildConfig.java
+ com.example.myapplication.BuildConfig
+com/example/myapplication/Model/PokeTypes.java
+ com.example.myapplication.Model.PokeTypes
+com/example/myapplication/Model/ModeloPoke.java
+ com.example.myapplication.Model.ModeloPoke
+com/example/myapplication/Common/Common.java
+ com.example.myapplication.Common.Common
+com/example/myapplication/Model/Stat.java
+ com.example.myapplication.Model.Stat
+com/example/myapplication/Model/Type.java
+ com.example.myapplication.Model.Type
+com/example/myapplication/Interface/IItemClickListener.java
+ com.example.myapplication.Interface.IItemClickListener
+com/example/myapplication/Model/PokeStats.java
+ com.example.myapplication.Model.PokeStats
+com/example/myapplication/Presenter/PokeInfos.java
+ com.example.myapplication.Presenter.PokeInfos
+com/example/myapplication/Presenter/PokeList.java
+ com.example.myapplication.Presenter.PokeList
+ com.example.myapplication.Presenter.PokeList$1
+com/example/myapplication/Splash.java
+ com.example.myapplication.Splash
+com/example/myapplication/Adapter/Adapter.java
+ com.example.myapplication.Adapter.Adapter
+ com.example.myapplication.Adapter.Adapter$ViewHolder
+com/example/myapplication/MainActivity.java
+ com.example.myapplication.MainActivity
+com/example/myapplication/PokeDetail.java
+ com.example.myapplication.PokeDetail
+ com.example.myapplication.PokeDetail$1
+ com.example.myapplication.PokeDetail$2
+com/example/myapplication/FormLogin.java
+ com.example.myapplication.FormLogin
+ com.example.myapplication.FormLogin$1
+com/example/myapplication/ListTypes.java
+ com.example.myapplication.ListTypes
+com/example/myapplication/FormCadastro.java
+ com.example.myapplication.FormCadastro
